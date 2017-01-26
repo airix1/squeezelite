@@ -326,6 +326,10 @@ static void process_strm(u8_t *pkt, int len) {
 #if GPIO
 			ampidle = 0;
 #endif
+			LOCK_D;
+                        decode.state = DECODE_RUNNING;
+                        UNLOCK_D;
+			
 			LOG_DEBUG("unpause at: %u now: %u", jiffies, gettime_ms());
 			sendSTAT("STMr", 0);
 		}
